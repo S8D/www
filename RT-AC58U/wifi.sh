@@ -1,5 +1,5 @@
 #!/bin/bash
-PhienBan="20200307a"
+PhienBan="20200307b"
 opkg list-installed | grep -qw curl || opkg update
 opkg list-installed | grep -qw curl || opkg install curl
 
