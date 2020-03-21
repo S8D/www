@@ -13,8 +13,8 @@
 # Short-Description: DNSCrypt client proxy
 # Description:       Encrypted/authenticated DNS proxy
 ### END INIT INFO
-
-cmd="/root/dns/dns "-config" "/root/dns/dns/CauHinh.toml""
+CauHinh=/root/dns/CauHinh.toml
+cmd="/root/dns/dns "-config" "$CauHinh""
 
 name=$(basename $(readlink -f $0))
 pid_file="/var/run/$name.pid"
