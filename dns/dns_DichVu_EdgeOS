@@ -18,6 +18,8 @@ TM="/config/dns"
 CauHinh="$TM/CauHinh.toml"
 cmd="$TM/dns "-config" "$CauHinh""
 
+echo "# Đang chạy Dịch Vụ $PhienBan"
+
 name=$(basename $(readlink -f $0))
 pid_file="/var/run/$name.pid"
 stdout_log="/var/log/$name.log"
@@ -36,21 +38,21 @@ is_running() {
 case "$1" in
     start)
         if is_running; then
-            echo "Already started"
+            echo "DNSCrypt đang chạy"
         else
-            echo "Starting $name"
+            echo "Đang gọi $name"
             cd '$TM'
             $cmd >> "$stdout_log" 2>> "$stderr_log" &
             echo $! > "$pid_file"
             if ! is_running; then
-                echo "Unable to start, see $stdout_log and $stderr_log"
+                echo "Không thể chạy DNSCrypt, xem lỗi: cat $stdout_log | cat $stderr_log"
                 exit 1
             fi
         fi
     ;;
     stop)
         if is_running; then
-            echo -n "Stopping $name.."
+            echo -n "Đang dừng $name.."
             kill $(get_pid)
             for i in $(seq 1 10)
             do
@@ -62,36 +64,36 @@ case "$1" in
             done
             echo
             if is_running; then
-                echo "Not stopped; may still be shutting down or shutdown may have failed"
+                echo "DNSCrypt không dừng được, có lẽ DNSCrypt đã tắt hoặc việc dừng DNSCrypt thất bại"
                 exit 1
             else
-                echo "Stopped"
+                echo "Đã dừng DNSCrypt"
                 if [ -f "$pid_file" ]; then
                     rm "$pid_file"
                 fi
             fi
         else
-            echo "Not running"
+            echo "DNSCrypt không chạy"
         fi
     ;;
     restart)
         $0 stop
         if is_running; then
-            echo "Unable to stop, will not attempt to start"
+            echo "Không thể dừng DNSCrypt, dừng việc gọi DNSCrypt lại"
             exit 1
         fi
         $0 start
     ;;
     status)
         if is_running; then
-            echo "Running"
+            echo "DNSCrypt đang chạy"
         else
-            echo "Stopped"
+            echo "DNSCrypt không chạy"
             exit 1
         fi
     ;;
     *)
-    echo "Usage: $0 {start|stop|restart|status}"
+    echo "# Tham số: $0 {start|stop|restart|status}"
     exit 1
     ;;
 esac
