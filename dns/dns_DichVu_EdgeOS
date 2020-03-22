@@ -13,9 +13,10 @@
 # Short-Description: DNSCrypt client proxy
 # Description:       Encrypted/authenticated DNS proxy
 ### END INIT INFO
-PhienBan="20200322a"
-CauHinh="/config/dns/CauHinh.toml"
-cmd="/config/dns/dns "-config" "$CauHinh""
+PhienBan="20200322b"
+TM="/config/dns"
+CauHinh="$TM/CauHinh.toml"
+cmd="$TM/dns "-config" "$CauHinh""
 
 name=$(basename $(readlink -f $0))
 pid_file="/var/run/$name.pid"
@@ -38,7 +39,7 @@ case "$1" in
             echo "Already started"
         else
             echo "Starting $name"
-            cd '/root/dns'
+            cd '$TM'
             $cmd >> "$stdout_log" 2>> "$stderr_log" &
             echo $! > "$pid_file"
             if ! is_running; then
