@@ -13,7 +13,7 @@
 # Short-Description: DNSCrypt client proxy
 # Description:       Encrypted/authenticated DNS proxy
 ### END INIT INFO
-PhienBan="20200322f"
+PhienBan="20200322g"
 TM="/config/dns"
 DV="/etc/init.d"
 CauHinh="$TM/CauHinh.toml"
@@ -60,6 +60,7 @@ case "$1" in
             if ! is_running; then
                 echo "$DauCau Không thể chạy DNSCrypt, xem lỗi: cat $stdout_log | cat $stderr_log"
                 exit 1
+            else echo "$DauCau DNSCrypt đang chạy"
             fi
         fi
     ;;
