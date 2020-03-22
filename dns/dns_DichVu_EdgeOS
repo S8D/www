@@ -2,10 +2,10 @@
 # For RedHat and cousins:
 # chkconfig: - 99 01
 # description: Encrypted/authenticated DNS proxy
-# processname: /root/dns/dns
+# processname: DNSCrypt-Proxy
 
 ### BEGIN INIT INFO
-# Provides:          /root/dns/dns
+# Provides:          /config/dns/dns
 # Required-Start:
 # Required-Stop:
 # Default-Start:     2 3 4 5
@@ -13,8 +13,8 @@
 # Short-Description: DNSCrypt client proxy
 # Description:       Encrypted/authenticated DNS proxy
 ### END INIT INFO
-CauHinh=/root/dns/CauHinh.toml
-cmd="/root/dns/dns "-config" "$CauHinh""
+CauHinh=/config/dns/CauHinh.toml
+cmd="/config/dns/dns "-config" "$CauHinh""
 
 name=$(basename $(readlink -f $0))
 pid_file="/var/run/$name.pid"
