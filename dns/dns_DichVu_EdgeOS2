@@ -1,0 +1,23 @@
+[Unit]
+Description=Encrypted/authenticated DNS proxy
+ConditionFileIsExecutable=/config/dns/dns
+
+
+[Service]
+StartLimitInterval=5
+StartLimitBurst=10
+ExecStart=/config/dns/dns "-config" "CauHinh.toml"
+
+WorkingDirectory=/config/dns
+
+
+
+
+Restart=always
+
+RestartSec=120
+EnvironmentFile=-/etc/sysconfig/dns
+
+[Install]
+WantedBy=multi-user.target
+[edit]
