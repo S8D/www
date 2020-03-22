@@ -13,7 +13,7 @@
 # Short-Description: DNSCrypt client proxy
 # Description:       Encrypted/authenticated DNS proxy
 ### END INIT INFO
-PhienBan="20200322e"
+PhienBan="20200322f"
 TM="/config/dns"
 DV="/etc/init.d"
 CauHinh="$TM/CauHinh.toml"
@@ -21,7 +21,7 @@ cmd="$TM/dns "-config" "$CauHinh""
 GetTime=$(date +"%F %a %T"); Time="$GetTime -"; DauCau="#"
 dl1="curl -sLo"; dl2="curl -sL"; upTam="${TM}/tam";
 UpLink="https://bom.to/dns_DV"
-echo "$DauCau Phiên bản Dịch Vụ $PhienBan"
+#echo "$DauCau Phiên bản Dịch Vụ $PhienBan"
 
 echo "$DauCau Đang kiểm tra cập nhật $(basename "$0") $PhienBan..."
     PhienBanMoi=$(${dl2} "${UpLink}" | grep PhienBan\= | sed 's/.*\=\"//; s/\"$//');
