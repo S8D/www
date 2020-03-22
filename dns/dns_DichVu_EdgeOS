@@ -13,7 +13,7 @@
 # Short-Description: DNSCrypt client proxy
 # Description:       Encrypted/authenticated DNS proxy
 ### END INIT INFO
-PhienBan="20200322m"
+PhienBan="20200322l"
 TM="/config/dns"
 DV="/etc/init.d"
 CauHinh="$TM/CauHinh.toml"
@@ -29,7 +29,7 @@ echo "$DauCau Đang kiểm tra cập nhật $(basename "$0") $PhienBan..."
         #echo "$Time $(basename "$0") $PhienBan là bản mới nhất!"  >> $Log
     else echo "$DauCau Đang cập nhật $(basename "$0") v.$PhienBan lên v.$PhienBanMoi...";
         sudo cp $0 ${TM}/$PhienBan\_$(basename "$0")
-        sudo curl -sLo $upTam $UpLink; sudo chmod +x $upTam; sudo cp ${upTam} ${DV}/$0; sudo rm -rf $UpLink
+        sudo curl -sLo $upTam $UpLink; sudo chmod +x $upTam; sudo cp ${upTam} ${DV}/$(basename "$0"); sudo rm -rf $UpLink
         #echo "$Time $(basename "$0") được cập nhật lên $PhienBanMoi!"  >> $Log
         echo "$DauCau Khởi chạy $(basename "$0") $PhienBanMoi..."; sudo ${DV}/$(basename "$0"); exit 1; fi;
 
