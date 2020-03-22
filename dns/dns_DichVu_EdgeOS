@@ -13,7 +13,8 @@
 # Short-Description: DNSCrypt client proxy
 # Description:       Encrypted/authenticated DNS proxy
 ### END INIT INFO
-CauHinh=/config/dns/CauHinh.toml
+PhienBan="20200322a"
+CauHinh="/config/dns/CauHinh.toml"
 cmd="/config/dns/dns "-config" "$CauHinh""
 
 name=$(basename $(readlink -f $0))
