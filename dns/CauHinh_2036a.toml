@@ -172,7 +172,7 @@ cert_refresh_delay = 240
 ## Keep tls_cipher_suite empty if you have issues fetching sources or
 ## connecting to some DoH servers. Google and Cloudflare are fine with it.
 
-# tls_cipher_suite = [52392, 49199]
+tls_cipher_suite = [52392, 49199]
 
 
 ## Fallback resolver
