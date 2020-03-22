@@ -13,12 +13,25 @@
 # Short-Description: DNSCrypt client proxy
 # Description:       Encrypted/authenticated DNS proxy
 ### END INIT INFO
-PhienBan="20200322d"
+PhienBan="20200322e"
 TM="/config/dns"
+DV="/etc/init.d"
 CauHinh="$TM/CauHinh.toml"
 cmd="$TM/dns "-config" "$CauHinh""
+GetTime=$(date +"%F %a %T"); Time="$GetTime -"; DauCau="#"
+dl1="curl -sLo"; dl2="curl -sL"; upTam="${TM}/tam";
+UpLink="https://bom.to/dns_DV"
+echo "$DauCau Phiên bản Dịch Vụ $PhienBan"
 
-echo "# Đang chạy Dịch Vụ $PhienBan"
+echo "$DauCau Đang kiểm tra cập nhật $(basename "$0") $PhienBan..."
+    PhienBanMoi=$(${dl2} "${UpLink}" | grep PhienBan\= | sed 's/.*\=\"//; s/\"$//');
+    if [ $PhienBanMoi == $PhienBan ]; then echo "$DauCau $(basename "$0") $PhienBan là bản mới nhất!";
+        #echo "$Time $(basename "$0") $PhienBan là bản mới nhất!"  >> $Log
+    else echo "$DauCau Đang cập nhật $(basename "$0") v.$PhienBan lên v.$PhienBanMoi...";
+        sudo cp $0 ${TM}/$PhienBan\_$(basename "$0")
+        $dl1 $upTam $UpLink; chmod +x $upTam; mv $upTam ${DV}/$0
+        #echo "$Time $(basename "$0") được cập nhật lên $PhienBanMoi!"  >> $Log
+        echo "$DauCau Khởi chạy $(basename "$0") $PhienBanMoi..."; sh ${DV}/$(basename "$0"); exit 1; fi;
 
 name=$(basename $(readlink -f $0))
 pid_file="/var/run/$name.pid"
@@ -38,21 +51,21 @@ is_running() {
 case "$1" in
     start)
         if is_running; then
-            echo "# DNSCrypt đang chạy"
+            echo "$DauCau DNSCrypt đang chạy"
         else
-            echo "# Đang gọi $name..."
+            echo "$DauCau Đang gọi $name..."
             cd "$TM"
             $cmd >> "$stdout_log" 2>> "$stderr_log" &
             echo $! > "$pid_file"
             if ! is_running; then
-                echo "# Không thể chạy DNSCrypt, xem lỗi: cat $stdout_log | cat $stderr_log"
+                echo "$DauCau Không thể chạy DNSCrypt, xem lỗi: cat $stdout_log | cat $stderr_log"
                 exit 1
             fi
         fi
     ;;
     stop)
         if is_running; then
-            echo -n "# Đang dừng $name..."
+            echo -n "$DauCau Đang dừng $name..."
             kill $(get_pid)
             for i in $(seq 1 10)
             do
@@ -64,36 +77,36 @@ case "$1" in
             done
             echo
             if is_running; then
-                echo "# DNSCrypt không dừng được, có lẽ DNSCrypt đã tắt hoặc việc dừng DNSCrypt thất bại"
+                echo "$DauCau DNSCrypt không dừng được, có lẽ DNSCrypt đã tắt hoặc việc dừng DNSCrypt thất bại"
                 exit 1
             else
-                echo "# Đã dừng DNSCrypt"
+                echo "$DauCau Đã dừng DNSCrypt"
                 if [ -f "$pid_file" ]; then
                     rm "$pid_file"
                 fi
             fi
         else
-            echo "# DNSCrypt không chạy"
+            echo "$DauCau DNSCrypt không chạy"
         fi
     ;;
     restart)
         $0 stop
         if is_running; then
-            echo "# Không thể dừng DNSCrypt, dừng việc gọi DNSCrypt lại"
+            echo "$DauCau Không thể dừng DNSCrypt, dừng việc gọi DNSCrypt lại"
             exit 1
         fi
         $0 start
     ;;
     status)
         if is_running; then
-            echo "# DNSCrypt đang chạy"
+            echo "$DauCau DNSCrypt đang chạy"
         else
-            echo "# DNSCrypt không chạy"
+            echo "$DauCau DNSCrypt không chạy"
             exit 1
         fi
     ;;
     *)
-    echo "# Tham số: $0 {start|stop|restart|status}"
+    echo "$DauCau Tham số: $0 {start|stop|restart|status}"
     exit 1
     ;;
 esac
