@@ -13,7 +13,7 @@
 # Short-Description: DNSCrypt client proxy
 # Description:       Encrypted/authenticated DNS proxy
 ### END INIT INFO
-PhienBan="20200322b"
+PhienBan="20200322c"
 TM="/config/dns"
 CauHinh="$TM/CauHinh.toml"
 cmd="$TM/dns "-config" "$CauHinh""
@@ -40,8 +40,8 @@ case "$1" in
         if is_running; then
             echo "DNSCrypt đang chạy"
         else
-            echo "Đang gọi $name"
-            cd '$TM'
+            echo "Đang gọi $name..."
+            cd "$TM"
             $cmd >> "$stdout_log" 2>> "$stderr_log" &
             echo $! > "$pid_file"
             if ! is_running; then
@@ -52,7 +52,7 @@ case "$1" in
     ;;
     stop)
         if is_running; then
-            echo -n "Đang dừng $name.."
+            echo -n "Đang dừng $name..."
             kill $(get_pid)
             for i in $(seq 1 10)
             do
