@@ -13,7 +13,7 @@
 # Short-Description: DNSCrypt client proxy
 # Description:       Encrypted/authenticated DNS proxy
 ### END INIT INFO
-PhienBan="20200322l"
+PhienBan="20200322m"
 TM="/config/dns"
 DV="/etc/init.d"
 CauHinh="$TM/CauHinh.toml"
