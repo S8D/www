@@ -236,10 +236,10 @@ netprobe_address = '8.8.4.4:53'
 ## Automatic log files rotation
 
 # Maximum log files size in MB - Set to 0 for unlimited.
-log_files_max_size = 2
+log_files_max_size = 5
 
 # How long to keep backup files, in days
-log_files_max_age = 3
+log_files_max_age = 15
 
 # Maximum log files backups to keep (or 0 to keep all backups)
 log_files_max_backups = 1
