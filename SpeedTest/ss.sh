@@ -44,7 +44,7 @@ while getopts "h?asv" opt; do
 	esac
 done
 shift $((OPTIND-1))
-
+echo ""
 echo "$DauCau Đang kiểm tra cập nhật $(basename "$0") $PhienBan..."
 PhienBanMoi=$(curl -sL "${UpLink}" | grep PhienBan\= | sed 's/.*\=\"//; s/\"$//');
 if [ $PhienBanMoi == $PhienBan ]; then echo "$DauCau $(basename "$0") $PhienBan là bản mới nhất!";        
@@ -52,4 +52,5 @@ else echo "$DauCau Đang cập nhật $(basename "$0") v.$PhienBan lên v.$Phien
 	cp $0 ${SP}/$PhienBan\_$(basename "$0")
 	curl -sLo $upTam $UpLink; chmod +x $upTam; cp ${upTam} ${TM}/$(basename "$0"); rm -rf $upTam
 	echo "$DauCau Khởi chạy $(basename "$0") $PhienBanMoi..."; ${TM}/$(basename "$0"); exit 1; fi;
+echo ""
 Giup
