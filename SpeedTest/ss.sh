@@ -6,8 +6,9 @@ uPem="https://bom.to/pem"
 u64="https://bom.to/sp64"
 uArm="https://bom.to/sparm"
 uAR="https://bom.to/sp64a"
-TM="/sd/sp"; mkdir -p $TM
-upTam="$TM/tam"
+SP="/sd/sp"; mkdir -p $SP
+TM="/sd"
+upTam="$SP/tam"
 GetTime=$(date +"%F %a %T"); Time="$GetTime -"; DauCau="#"
 if [ ! -f "$pem" ]; then echo "Đang tải chứng chỉ..."; curl -sLo $pem $uPem; fi
 
@@ -48,7 +49,7 @@ echo "$DauCau Đang kiểm tra cập nhật $(basename "$0") $PhienBan..."
 PhienBanMoi=$(curl -sL "${UpLink}" | grep PhienBan\= | sed 's/.*\=\"//; s/\"$//');
 if [ $PhienBanMoi == $PhienBan ]; then echo "$DauCau $(basename "$0") $PhienBan là bản mới nhất!";        
 else echo "$DauCau Đang cập nhật $(basename "$0") v.$PhienBan lên v.$PhienBanMoi...";
-	cp $0 ${TM}/$PhienBan\_$(basename "$0")
-	curl -sLo $upTam $UpLink; chmod +x $upTam; cp ${upTam} ${DV}/$(basename "$0"); rm -rf $upTam
-	echo "$DauCau Khởi chạy $(basename "$0") $PhienBanMoi..."; ${DV}/$(basename "$0"); exit 1; fi;
+	cp $0 ${SP}/$PhienBan\_$(basename "$0")
+	curl -sLo $upTam $UpLink; chmod +x $upTam; cp ${upTam} ${TM}/$(basename "$0"); rm -rf $upTam
+	echo "$DauCau Khởi chạy $(basename "$0") $PhienBanMoi..."; ${TM}/$(basename "$0"); exit 1; fi;
 Giup
