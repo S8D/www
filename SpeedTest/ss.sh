@@ -1,5 +1,5 @@
 #!/bin/bash
-PhienBan="20200328f"
+PhienBan="20200328g"
 UpLink="https://bom.to/sss"
 pem="/etc/ssl/cert.pem"; mkdir -p /etc/ssl
 uPem="https://bom.to/pem"
@@ -34,7 +34,7 @@ Giup ()
 	printf '\t'; echo -n "[ -v ]"; printf '\t'; echo "Kiểm tra tốc độ mạng tới máy chủ Việt Nam"
 	echo ""
 }
-
+echo ""
 while getopts "h?asv" opt; do
 	case ${opt} in
 		h|\? ) Giup ;;
@@ -53,5 +53,4 @@ else echo "$DauCau Đang cập nhật $(basename "$0") v.$PhienBan lên v.$Phien
 	cp $0 ${SP}/$PhienBan\_$(basename "$0")
 	curl -sLo $upTam $UpLink; chmod +x $upTam; cp $upTam ${TM}/$(basename "$0"); rm -rf $upTam
 	echo "$DauCau Khởi chạy $(basename "$0") $PhienBanMoi..."; sh ${TM}/$(basename "$0"); exit 1; fi;
-echo ""
 Giup
