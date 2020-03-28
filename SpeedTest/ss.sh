@@ -1,5 +1,5 @@
 #!/bin/bash
-PhienBan="20200328d"
+PhienBan="20200328e"
 UpLink="https://bom.to/sss"
 pem="/etc/ssl/cert.pem"; mkdir -p /etc/ssl
 uPem="https://bom.to/pem"
@@ -23,7 +23,7 @@ if [ ! -f "$sp" ]; then echo "Đang tải SpeedTest..."; curl -sLo $sp $upem; ch
 Giup ()
 {
 	echo ""
-	echo "Cú pháp gõ:"
+	echo "Cú pháp:"
 	printf '\t'; echo "$(basename "$0") [ -h | -a | -s | -v ]"
 	echo ""
 	echo "Chức năng:"
