@@ -6,8 +6,8 @@ cat $npt | while read output
 do
     ping -c 1 "$output" > /dev/null
     if [ $? -eq 0 ]; then
-    echo "# $output | UP+++" 
+    echo "# ONLINE  + $output" 
     else
-    echo "$ $output | DOWN---"
+    echo "# OFFLINE - $output"
     fi
 done
