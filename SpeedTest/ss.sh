@@ -1,11 +1,14 @@
 #!/bin/bash
-PhienBan="20200328a"
+PhienBan="20200328b"
+UpLink="https://bom.to/sss"
 pem="/etc/ssl/cert.pem"; mkdir -p /etc/ssl
 uPem="https://bom.to/pem"
 u64="https://bom.to/sp64"
 uArm="https://bom.to/sparm"
 uAR="https://bom.to/sp64a"
-
+TM="/sd/sp"; mkdir -p $TM
+upTam="$TM/tam"
+GetTime=$(date +"%F %a %T"); Time="$GetTime -"; DauCau="#"
 if [ ! -f "$pem" ]; then echo "Đang tải chứng chỉ..."; curl -sLo $pem $uPem; fi
 
 OS=`uname -m`; x64="x86_64"; arm="armv7l"; Android="aarch64"
@@ -24,7 +27,7 @@ Giup ()
 	echo ""
 	echo "Chức năng:"
 	printf '\t\t'; echo -n "[ -h ]"; printf '\t'; echo "Hiện hướng dẫn sử dụng"
-	printf '\t\t'; echo -n "[ -s ]"; printf '\t'; echo "Kiểm tra tốc độ mạng tới máy chủ Việt Nam"
+	printf '\t\t'; echo -n "[ -s ]"; printf '\t'; echo "Kiểm tra tốc độ mạng tới máy chủ Singapore"
 	printf '\t\t'; echo -n "[ -v ]"; printf '\t'; echo "Kiểm tra tốc độ mạng tới máy chủ Việt Nam"
 	echo ""
 }
@@ -38,4 +41,12 @@ while getopts "h?sv" opt; do
 	esac
 done
 shift $((OPTIND-1))
-echo "$(basename "$0") $PhienBan"; Giup
+
+echo "$DauCau Đang kiểm tra cập nhật $(basename "$0") $PhienBan..."
+PhienBanMoi=$(curl -sL "${UpLink}" | grep PhienBan\= | sed 's/.*\=\"//; s/\"$//');
+if [ $PhienBanMoi == $PhienBan ]; then echo "$DauCau $(basename "$0") $PhienBan là bản mới nhất!";        
+else echo "$DauCau Đang cập nhật $(basename "$0") v.$PhienBan lên v.$PhienBanMoi...";
+	cp $0 ${TM}/$PhienBan\_$(basename "$0")
+	curl -sLo $upTam $UpLink; chmod +x $upTam; cp ${upTam} ${DV}/$(basename "$0"); rm -rf $upTam
+	echo "$DauCau Khởi chạy $(basename "$0") $PhienBanMoi..."; ${DV}/$(basename "$0"); exit 1; fi;
+Giup
