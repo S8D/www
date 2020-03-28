@@ -1,5 +1,5 @@
 #!/bin/bash
-PhienBan="20200328j"
+PhienBan="20200328k"
 UpLink="https://bom.to/sss"
 pem="/etc/ssl/cert.pem"; mkdir -p /etc/ssl
 uPem="https://bom.to/pem"
@@ -20,7 +20,7 @@ if [ $OS == $arm ]; then upem=$uArm; if [ -d /www/cgi-bin ]; then sp="/usr/sbin/
 if [ $OS == $Android ]; then upem=$uAR; sp="/system/xbin/sp"; echo "OS: $OS | Android"; fi
 
 if [ ! -f "$sp" ]; then echo "Đang tải SpeedTest..."; curl -sLo $sp $upem; chmod +x $sp; fi
-if [ $OS != $x64 ] || [ $OS != $arm ] || [ $OS != $Android ]; then echo "Chưa hỗ trợ hệ thống bạn đang dùng"; exit 1; fi
+if [ $OS != $x64 ] && [ $OS != $arm ] && [ $OS != $Android ]; then echo "Chưa hỗ trợ hệ thống bạn đang dùng"; exit 1; fi
 
 Giup ()
 {
