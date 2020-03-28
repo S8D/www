@@ -1,5 +1,5 @@
 #!/bin/bash
-PhienBan="20200328c"
+PhienBan="20200328d"
 UpLink="https://bom.to/sss"
 pem="/etc/ssl/cert.pem"; mkdir -p /etc/ssl
 uPem="https://bom.to/pem"
@@ -23,13 +23,13 @@ Giup ()
 {
 	echo ""
 	echo "Cú pháp gõ:"
-	printf '\t\t'; echo "$(basename "$0") [ -h | -a | -s | -v ]"
+	printf '\t'; echo "$(basename "$0") [ -h | -a | -s | -v ]"
 	echo ""
 	echo "Chức năng:"
-	printf '\t\t'; echo -n "[ -h ]"; printf '\t'; echo "Hiện hướng dẫn sử dụng"
-	printf '\t\t'; echo -n "[ -a ]"; printf '\t'; echo "Kiểm tra tốc độ mạng tới tất cả máy chủ"
-	printf '\t\t'; echo -n "[ -s ]"; printf '\t'; echo "Kiểm tra tốc độ mạng tới máy chủ Singapore"
-	printf '\t\t'; echo -n "[ -v ]"; printf '\t'; echo "Kiểm tra tốc độ mạng tới máy chủ Việt Nam"
+	printf '\t'; echo -n "[ -h ]"; printf '\t'; echo "Hiện hướng dẫn sử dụng"
+	printf '\t'; echo -n "[ -a ]"; printf '\t'; echo "Kiểm tra tốc độ mạng tới tất cả máy chủ"
+	printf '\t'; echo -n "[ -s ]"; printf '\t'; echo "Kiểm tra tốc độ mạng tới máy chủ Singapore"
+	printf '\t'; echo -n "[ -v ]"; printf '\t'; echo "Kiểm tra tốc độ mạng tới máy chủ Việt Nam"
 	echo ""
 }
 
