@@ -1,19 +1,20 @@
 #!/bin/bash
-PhienBan="20200328h"
+PhienBan="20200328i"
 UpLink="https://bom.to/sss"
 pem="/etc/ssl/cert.pem"; mkdir -p /etc/ssl
 uPem="https://bom.to/pem"
 u64="https://bom.to/sp64"
 uArm="https://bom.to/sparm"
 uAR="https://bom.to/sp64a"
-TM="/sd"; mkdir -p $TM
-SP="$TM/sp"; mkdir -p $SP
-upTam="$SP/tam"
 GetTime=$(date +"%F %a %T"); Time="$GetTime -"; DauCau="#"
 
 if [ ! -f "$pem" ]; then echo "Đang tải chứng chỉ..."; curl -sLo $pem $uPem; fi
 
 OS=`uname -m`; x64="x86_64"; arm="armv7l"; Android="aarch64"
+
+if [ $OS == $x64 ] || [ $OS == $arm ]; then TM="/sd"; mkdir -p $TM; fi
+if [ $OS == $Android ]; then TM="/sdcard"; mkdir -p $TM; fi
+SP="$TM/sp"; mkdir -p $SP; upTam="$SP/tam"
 if [ $OS == $x64 ]; then upem=$u64; sp="/usr/sbin/sp"; fi
 if [ $OS == $arm ]; then upem=$uArm; if [ -d /www/cgi-bin ]; then sp="/usr/sbin/sp"; else sp="/opt/sbin/sp"; fi; fi
 if [ $OS == $Android ]; then upem=$uAR; sp="/system/xbin/sp"; echo "OS: $OS | Android"; fi
