@@ -1,5 +1,5 @@
 #!/bin/bash
-PhienBan="20200328k"
+PhienBan="20200328l"
 UpLink="https://bom.to/sss"
 pem="/etc/ssl/cert.pem"; mkdir -p /etc/ssl
 uPem="https://bom.to/pem"
@@ -17,7 +17,7 @@ if [ $OS == $Android ]; then TM="/sdcard"; mkdir -p $TM; fi
 SP="$TM/sp"; mkdir -p $SP; upTam="$SP/tam"
 if [ $OS == $x64 ]; then upem=$u64; sp="/usr/sbin/sp"; fi
 if [ $OS == $arm ]; then upem=$uArm; if [ -d /www/cgi-bin ]; then sp="/usr/sbin/sp"; else sp="/opt/sbin/sp"; fi; fi
-if [ $OS == $Android ]; then upem=$uAR; sp="/system/xbin/sp"; echo "OS: $OS | Android"; fi
+if [ $OS == $Android ]; then upem=$uAR; sp="/system/xbin/sp"; fi
 
 if [ ! -f "$sp" ]; then echo "Đang tải SpeedTest..."; curl -sLo $sp $upem; chmod +x $sp; fi
 if [ $OS != $x64 ] && [ $OS != $arm ] && [ $OS != $Android ]; then echo "Chưa hỗ trợ hệ thống bạn đang dùng"; exit 1; fi
