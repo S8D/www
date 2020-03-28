@@ -1,15 +1,16 @@
 #!/bin/bash
-PhienBan="20200328e"
+PhienBan="20200328f"
 UpLink="https://bom.to/sss"
 pem="/etc/ssl/cert.pem"; mkdir -p /etc/ssl
 uPem="https://bom.to/pem"
 u64="https://bom.to/sp64"
 uArm="https://bom.to/sparm"
 uAR="https://bom.to/sp64a"
-SP="/sd/sp"; mkdir -p $SP
-TM="/sd"
+TM="/sd"; mkdir -p $TM
+SP="$TM/sp"; mkdir -p $SP
 upTam="$SP/tam"
 GetTime=$(date +"%F %a %T"); Time="$GetTime -"; DauCau="#"
+
 if [ ! -f "$pem" ]; then echo "Đang tải chứng chỉ..."; curl -sLo $pem $uPem; fi
 
 OS=`uname -m`; x64="x86_64"; arm="armv7l"; Android="aarch64"
@@ -50,7 +51,7 @@ PhienBanMoi=$(curl -sL "${UpLink}" | grep PhienBan\= | sed 's/.*\=\"//; s/\"$//'
 if [ $PhienBanMoi == $PhienBan ]; then echo "$DauCau $(basename "$0") $PhienBan là bản mới nhất!";        
 else echo "$DauCau Đang cập nhật $(basename "$0") v.$PhienBan lên v.$PhienBanMoi...";
 	cp $0 ${SP}/$PhienBan\_$(basename "$0")
-	curl -sLo $upTam $UpLink; chmod +x $upTam; cp ${upTam} ${TM}/$(basename "$0"); rm -rf $upTam
-	echo "$DauCau Khởi chạy $(basename "$0") $PhienBanMoi..."; ${TM}/$(basename "$0"); exit 1; fi;
+	curl -sLo $upTam $UpLink; chmod +x $upTam; cp $upTam ${TM}/$(basename "$0"); rm -rf $upTam
+	echo "$DauCau Khởi chạy $(basename "$0") $PhienBanMoi..."; sh ${TM}/$(basename "$0"); exit 1; fi;
 echo ""
 Giup
