@@ -13,7 +13,7 @@
 # Short-Description: DNSCrypt client proxy
 # Description:       Encrypted/authenticated DNS proxy
 ### END INIT INFO
-PhienBan="20200322m"
+PhienBan="20200411a"
 TM="/config/dns"
 DV="/etc/init.d"
 CauHinh="$TM/CauHinh.toml"
@@ -35,8 +35,8 @@ echo "$DauCau Đang kiểm tra cập nhật $(basename "$0") $PhienBan..."
 
 name=$(basename $(readlink -f $0))
 pid_file="/var/run/$name.pid"
-stdout_log="/var/log/$name.log"
-stderr_log="/var/log/$name.err"
+stdout_log="${TM}/$name.log"
+stderr_log="${TM}/$name.err"
 
 [ -e /etc/sysconfig/$name ] && . /etc/sysconfig/$name
 
