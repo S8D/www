@@ -1,14 +1,14 @@
 [Unit]
 Description=Encrypted/authenticated DNS proxy
-ConditionFileIsExecutable=/config/dns/dns
+ConditionFileIsExecutable=/config/sd/dns/dns
 
 
 [Service]
 StartLimitInterval=5
 StartLimitBurst=10
-ExecStart=/config/dns/dns "-config" "CauHinh.toml"
+ExecStart=/config/sd/dns/dns "-config" "CauHinh.toml"
 
-WorkingDirectory=/config/dns
+WorkingDirectory=/config/sd/dns
 
 
 

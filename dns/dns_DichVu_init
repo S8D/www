@@ -5,7 +5,7 @@
 # processname: DNSCrypt-Proxy
 
 ### BEGIN INIT INFO
-# Provides:          /config/dns/dns
+# Provides:          /config/sd/dns/dns
 # Required-Start:
 # Required-Stop:
 # Default-Start:     2 3 4 5
@@ -13,8 +13,8 @@
 # Short-Description: DNSCrypt client proxy
 # Description:       Encrypted/authenticated DNS proxy
 ### END INIT INFO
-PhienBan="20200411a"
-TM="/config/dns"
+PhienBan="20200424a"
+TM="/config/sd/dns"
 DV="/etc/init.d"
 CauHinh="$TM/CauHinh.toml"
 cmd="$TM/dns "-config" "$CauHinh""
@@ -35,8 +35,8 @@ echo "$DauCau Đang kiểm tra cập nhật $(basename "$0") $PhienBan..."
 
 name=$(basename $(readlink -f $0))
 pid_file="/var/run/$name.pid"
-stdout_log="${TM}/$name.log"
-stderr_log="${TM}/$name.err"
+stdout_log="${TM}/$name.log"; if [ ! -f "$stdout_log" ]; then sudo echo "" > $stdout_log; fi
+stderr_log="${TM}/$name.err"; if [ ! -f "$stderr_log" ]; then sudo echo "" > $stderr_log; fi
 
 [ -e /etc/sysconfig/$name ] && . /etc/sysconfig/$name
 
