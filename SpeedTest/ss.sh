@@ -1,11 +1,14 @@
 #!/bin/bash
-PhienBan="20200328l"
+PhienBan="20200516a"
 UpLink="https://bom.to/sss"
 pem="/etc/ssl/cert.pem"; mkdir -p /etc/ssl
 uPem="https://bom.to/pem"
 u64="https://bom.to/sp64"
 uArm="https://bom.to/sparm"
 uAR="https://bom.to/sp64a"
+SG="13623"
+HK="16176"
+VN="6106"
 GetTime=$(date +"%F %a %T"); Time="$GetTime -"; DauCau="#"
 
 if [ ! -f "$pem" ]; then echo "Đang tải chứng chỉ..."; curl -sLo $pem $uPem; fi
@@ -32,16 +35,21 @@ Giup ()
 	printf '\t'; echo -n "[ -h ]"; printf '\t'; echo "Hiện hướng dẫn sử dụng"
 	printf '\t'; echo -n "[ -a ]"; printf '\t'; echo "Kiểm tra tốc độ mạng tới tất cả máy chủ"
 	printf '\t'; echo -n "[ -s ]"; printf '\t'; echo "Kiểm tra tốc độ mạng tới máy chủ Singapore"
+	printf '\t'; echo -n "[ -k ]"; printf '\t'; echo "Kiểm tra tốc độ mạng tới máy chủ Hong Kong"
 	printf '\t'; echo -n "[ -v ]"; printf '\t'; echo "Kiểm tra tốc độ mạng tới máy chủ Việt Nam"
+	printf '\t'; echo -n "[ -t ]"; printf '\t'; echo "Kiểm tra tốc độ mạng tới máy chủ tùy chọn"
 	echo ""
 }
 
-while getopts "h?asv" opt; do echo ""
+while getopts "h?askvt" opt; do echo ""
 	case ${opt} in
 		h|\? ) Giup ;;
-		a    ) echo "Kiểm tra tốc độ mạng tới tất cả máy chủ"; sp -B -s 9575; sp -B -s 6106 ;;
-		s    ) echo "Kiểm tra tốc độ mạng tới máy chủ Singapore"; sp -B -s 9575 ;;
-		v    ) echo "Kiểm tra tốc độ mạng tới máy chủ Việt Nam"; sp -B -s 6106 ;;
+		a    ) echo "Kiểm tra tốc độ mạng tới tất cả máy chủ"; sp -B -s $SG; sp -B -s $HK; sp -B -s $VN ;;
+		s    ) echo "Kiểm tra tốc độ mạng tới máy chủ Singapore"; sp -B -s $SG ;;
+		k    ) echo "Kiểm tra tốc độ mạng tới máy chủ Hong Kong"; sp -B -s $HK ;;
+		v    ) echo "Kiểm tra tốc độ mạng tới máy chủ Việt Nam"; sp -B -s $VN ;;
+		t    ) echo "Kiểm tra tốc độ mạng tới máy chủ tùy chọn"; echo -en "Nhập ID máy chủ: "; read -r t; sp -B -s $t ;;
+		
 	\? ) exit 2 ;;
 	esac
 done
