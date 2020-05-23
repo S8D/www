@@ -1,5 +1,5 @@
 #!/bin/bash
-PhienBan="20200523e"
+PhienBan="20200523f"
 UpLink="https://bom.to/sss"
 pem="/etc/ssl/cert.pem"; mkdir -p /etc/ssl
 uPem="https://bom.to/pem"
@@ -50,8 +50,7 @@ while getopts "h?askvt" opt; do echo ""
 		s    ) echo "Kiểm tra tốc độ mạng tới máy chủ Singapore"; if [ $OS == $mip ]; then sp --bytes --secure --server $SG; else sp -B -s $SG; fi ;;
 		k    ) echo "Kiểm tra tốc độ mạng tới máy chủ Hong Kong"; if [ $OS == $mip ]; then sp --bytes --secure --server $HK; else sp -B -s $HK; fi ;;
 		v    ) echo "Kiểm tra tốc độ mạng tới máy chủ Việt Nam"; if [ $OS == $mip ]; then sp --bytes --secure --server $VN; else sp -B -s $VN; fi ;;
-		t    ) echo -e "Kiểm tra tốc độ mạng tới máy chủ tùy chọn\nSingapore [4235: StarHub | 7556: PT FirstMedia | 7311: M1 Limited | 20637: OVH Cloud | 5168: PT Indosat Tbk | 18791: FPT Telecom]"; echo -en "Nhập ID máy chủ: "; read -r t; if [ $OS == $mip ]; then sp --bytes --secure --server $t; else sp -B -s $t; fi ;;
-		
+		t    ) echo -e "Kiểm tra tốc độ mạng tới máy chủ tùy chọn\nSingapore\n13623: Singtel | 2054: Viewqwest | 367: NewMedia Express | 4235: StarHub | 5935: MyRepublic | 7311: M1 Limited | 7556: FirstMedia | 20637: OVH Cloud | 5168: Indosat Tbk | 18791: FPT | 7368: Telematika | 28921: PhoenixNAP | 31795: Solone | 31180: Campana\nHong Kong\n1536: STC | 22126: i3D.net | 2993: Website Solution | 26461: Telin | 28912: fdcservers.net | 32155: China Mobile | 19036: SmarTone | 33414: 3HK | 18745: FPT | 13538: CSL | 22991: Shanghai Huajuan | 16176: HGC Global | 14903: CSL\nVietNam\n6106: VNPT-NET | 18250: CMC | 8158: VTC | 26853: Viettel | 24232: TPCOMS | 2515: FPT | 22708: DCNET | 8491: SCTV | 3381: NetNam | 9668: Supernet | 16749: Vietnamobile | 27601: Viettel | 13373: SPT4 | 30149: Cloudzone | 6102: VNPT-NET | 19294: PowerNet | 10040: Viettel | 16873: Vietnamobile | 19060: VIETPN.COM | 27630: Viettel | 6085: VNPT-NET | 9903: Viettel | 6342: CMC | 2552: FPT | 9174: MOBIFONE | 8156: VTC | 16416: Vietnamobile | 10308: Supernet-hanoi | 5774: NetNam"; echo -en "Nhập ID máy chủ: "; read -r t; if [ $OS == $mip ]; then sp --bytes --secure --server $t; else sp -B -s $t; fi ;;		
 	\? ) exit 2 ;;
 	esac
 done
