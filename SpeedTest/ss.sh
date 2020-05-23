@@ -1,5 +1,5 @@
 #!/bin/bash
-PhienBan="20200523c"
+PhienBan="20200523d"
 UpLink="https://bom.to/sss"
 pem="/etc/ssl/cert.pem"; mkdir -p /etc/ssl
 uPem="https://bom.to/pem"
@@ -36,7 +36,7 @@ Giup ()
 	echo "Chức năng:"
 	printf '\t'; echo -n "[ -h ]"; printf '\t'; echo "Hiện hướng dẫn sử dụng"
 	printf '\t'; echo -n "[ -a ]"; printf '\t'; echo "Kiểm tra tốc độ mạng tới tất cả máy chủ"
-	printf '\t'; echo -n "[ -s ]"; printf '\t'; echo "Kiểm tra tốc độ mạng tới máy chủ Singapore [4235: StarHub | 7556: PT FirstMedia | 7311: M1 Limited | 20637: OVH Cloud | 5168: PT Indosat Tbk | 18791: FPT Telecom]"
+	printf '\t'; echo -n "[ -s ]"; printf '\t'; echo "Kiểm tra tốc độ mạng tới máy chủ Singapore"
 	printf '\t'; echo -n "[ -k ]"; printf '\t'; echo "Kiểm tra tốc độ mạng tới máy chủ Hong Kong"
 	printf '\t'; echo -n "[ -v ]"; printf '\t'; echo "Kiểm tra tốc độ mạng tới máy chủ Việt Nam"
 	printf '\t'; echo -n "[ -t ]"; printf '\t'; echo "Kiểm tra tốc độ mạng tới máy chủ tùy chọn"
@@ -50,7 +50,7 @@ while getopts "h?askvt" opt; do echo ""
 		s    ) echo "Kiểm tra tốc độ mạng tới máy chủ Singapore"; if [ $OS == $mip ]; then sp --bytes --secure --server $SG; else sp -B -s $SG; fi ;;
 		k    ) echo "Kiểm tra tốc độ mạng tới máy chủ Hong Kong"; if [ $OS == $mip ]; then sp --bytes --secure --server $HK; else sp -B -s $HK; fi ;;
 		v    ) echo "Kiểm tra tốc độ mạng tới máy chủ Việt Nam"; if [ $OS == $mip ]; then sp --bytes --secure --server $VN; else sp -B -s $VN; fi ;;
-		t    ) echo "Kiểm tra tốc độ mạng tới máy chủ tùy chọn"; echo -en "Nhập ID máy chủ: "; read -r t; if [ $OS == $mip ]; then sp --bytes --secure --server $t; else sp -B -s $t; fi ;;
+		t    ) echo -e "Kiểm tra tốc độ mạng tới máy chủ tùy chọn\nSingapore [4235: StarHub | 7556: PT FirstMedia | 7311: M1 Limited | 20637: OVH Cloud | 5168: PT Indosat Tbk | 18791: FPT Telecom]"; echo -en "Nhập ID máy chủ: "; read -r t; if [ $OS == $mip ]; then sp --bytes --secure --server $t; else sp -B -s $t; fi ;;
 		
 	\? ) exit 2 ;;
 	esac
