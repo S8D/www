@@ -1,5 +1,5 @@
 #!/bin/bash
-PhienBan="20200523d"
+PhienBan="20200523e"
 UpLink="https://bom.to/sss"
 pem="/etc/ssl/cert.pem"; mkdir -p /etc/ssl
 uPem="https://bom.to/pem"
@@ -16,7 +16,7 @@ if [ ! -f "$pem" ]; then echo "Đang tải chứng chỉ..."; curl -sLo $pem $uP
 
 OS=`uname -m`; x64="x86_64"; arm="armv7l"; Android="aarch64"; mip="mips"
 
-if [ $OS == $x64 ] || [ $OS == $arm ]; then TM="/sd"; mkdir -p $TM; fi
+if [ $OS == $x64 ] || [ $OS == $arm ] || [ $OS == $mip ]; then TM="/sd"; mkdir -p $TM; fi
 if [ $OS == $Android ]; then TM="/sdcard"; mkdir -p $TM; fi
 SP="$TM/sp"; mkdir -p $SP; upTam="$SP/tam"
 if [ $OS == $x64 ]; then upem=$u64; sp="/usr/sbin/sp"; fi
