@@ -1,5 +1,5 @@
 #!/bin/bash
-PhienBan="20200529c"
+PhienBan="20200529d"
 UpLink="https://bom.to/sss"
 pem="/etc/ssl/cert.pem"; mkdir -p /etc/ssl
 uPem="https://bom.to/pem"
@@ -48,7 +48,7 @@ Giup ()
 while getopts "h?askdvt" opt; do echo ""
 	case ${opt} in
 		h|\? ) Giup ;;
-		a    ) echo "Kiểm tra tốc độ mạng tới tất cả máy chủ"; echo "Kiểm tra tốc độ mạng tới máy chủ Singapore"; if [ $OS == $mip ]; then sp --share --bytes --secure --server $SG; echo "Kiểm tra tốc độ mạng tới máy chủ Hong Kong"; sp --share --bytes --secure --server $HK; echo "Kiểm tra tốc độ mạng tới máy chủ Đài Loan"; sp --share --bytes --secure --server $DL; echo "Kiểm tra tốc độ mạng tới máy chủ Việt Nam"; sp --share --bytes --secure --server $VN; else echo "Kiểm tra tốc độ mạng tới máy chủ Singapore"; sp -B -s $SG; echo "Kiểm tra tốc độ mạng tới máy chủ Hong Kong"; sp -B -s $HK; echo "Kiểm tra tốc độ mạng tới máy chủ Đài Loan"; sp -B -s $DL; echo "Kiểm tra tốc độ mạng tới máy chủ Việt Nam"; sp -B -s $VN; fi ;;
+		a    ) echo "Kiểm tra tốc độ mạng tới tất cả máy chủ"; if [ $OS == $mip ]; then echo -e "\nKiểm tra tốc độ mạng tới máy chủ Singapore"; sp --share --bytes --secure --server $SG; echo -e "\nKiểm tra tốc độ mạng tới máy chủ Hong Kong"; sp --share --bytes --secure --server $HK; echo -e "\nKiểm tra tốc độ mạng tới máy chủ Đài Loan"; sp --share --bytes --secure --server $DL; echo -e "\nKiểm tra tốc độ mạng tới máy chủ Việt Nam"; sp --share --bytes --secure --server $VN; else echo -e "\nKiểm tra tốc độ mạng tới máy chủ Singapore"; sp -B -s $SG; echo -e "\nKiểm tra tốc độ mạng tới máy chủ Hong Kong"; sp -B -s $HK; echo -e "\nKiểm tra tốc độ mạng tới máy chủ Đài Loan"; sp -B -s $DL; echo -e "\nKiểm tra tốc độ mạng tới máy chủ Việt Nam"; sp -B -s $VN; fi ;;
 		s    ) echo "Kiểm tra tốc độ mạng tới máy chủ Singapore"; if [ $OS == $mip ]; then sp --share --bytes --secure --server $SG; else sp -B -s $SG; fi ;;
 		k    ) echo "Kiểm tra tốc độ mạng tới máy chủ Hong Kong"; if [ $OS == $mip ]; then sp --share --bytes --secure --server $HK; else sp -B -s $HK; fi ;;
 		d    ) echo "Kiểm tra tốc độ mạng tới máy chủ Đài Loan"; if [ $OS == $mip ]; then sp --share --bytes --secure --server $DL; else sp -B -s $DL; fi ;;
