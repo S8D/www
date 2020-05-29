@@ -1,5 +1,5 @@
 #!/bin/bash
-PhienBan="20200529a"
+PhienBan="20200529b"
 UpLink="https://bom.to/sss"
 pem="/etc/ssl/cert.pem"; mkdir -p /etc/ssl
 uPem="https://bom.to/pem"
@@ -9,7 +9,7 @@ uAR="https://bom.to/sp64a"
 umip="https://bom.to/spp"
 SG="20637"
 HK="33414"
-HK="5334"
+DL="5334"
 VN="6106"
 GetTime=$(date +"%F %a %T"); Time="$GetTime -"; DauCau="#"
 
