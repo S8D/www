@@ -1,19 +1,46 @@
 #!/bin/bash
-PhienBan="201011a"
+PhienBan="201011b"
 GetTime=$(date +"%F %a %T"); Time="$GetTime -"; DauCau="#"
 TM="/sd/"; TMunb="${TM}/unb";
 Log="${TMunb}/NhatKy.log"; if [ ! -f "$Log" ]; then echo '' > $Log; fi
-clear; echo -e "\n$DauCau Đang kiểm tra phiên bản...";
-PhienBanOff=$(unbound -V | grep Version | sed 's/Version //')
-PhienBanOn=$(curl -sL https://github.com/NLnetLabs/unbound/releases/latest | grep release- | cut -d\" -f4 | grep [0-9]$ | sed 's/.*\-//' | sed -n '1p')
-DownURL="https://github.com/NLnetLabs/unbound/archive/release-${PhienBanOn}.tar.gz"
-UpLink="https://github.com/S8D/config/raw/master/UnBound/ub"
-upTam="${TMunb}/tam"; rm -f $upTam;
+
+up1="https://bom.to/_ub"
+up2="https://tiny.cc/_ub"
+up3="gg.gg/_ub"
+up4="https://github.com/S8D/config/raw/master/UnBound/ub.sh"
+dl1="https://bom.to/ub_"
+dl2="https://tiny.cc/ub_"
+dl3="gg.gg/ub_"
+dl4="https://github.com/NLnetLabs/unbound/releases/latest"
+
 DonDep () {
 	echo -e "\n$DauCau Đang xóa các file tạm..."
 	cd $TMunb; rm -rf $TMunb/unb.tar.gz $TMunb/unbound-*;
 	echo "$DauCau Bạn có thể xem thêm nhật ký chạy lệnh tại:\n${Log}"
-}	
+}
+
+clear; echo -e "\n$ Đang kiểm tra máy chủ cập nhật..."
+CheckNet_1 () { ping -q -c 1 -W 1 bom.to >/dev/null; }; 
+CheckNet_2 () { ping -q -c 1 -W 1 tiny.cc >/dev/null; }; 
+CheckNet_3 () { ping -q -c 1 -W 1 gg.gg >/dev/null; }; 
+CheckNet_4 () { ping -q -c 1 -W 1 github.com >/dev/null; }; DonDep;	
+if CheckNet_1; then UpLink="${up1}"; DownLink="${dl1}"; net="1"; else
+	if CheckNet_2; then UpLink="${up2}"; DownLink="${dl2}"; net="2"; else
+		if CheckNet_3; then UpLink="${up3}"; DownLink="${dl3}"; net="3"; else	
+			if CheckNet_4; then UpLink="${up4}"; DownLink="${dl4}"; net="4"; else net=0; 
+			fi
+		fi
+	fi
+fi
+
+
+
+echo -e "\n$DauCau Đang kiểm tra phiên bản...";
+PhienBanOff=$(unbound -V | grep Version | sed 's/Version //')
+PhienBanOn=$(curl -sL https://tiny.cc/ub_ | grep release- | cut -d\" -f4 | grep [0-9]$ | sed 's/.*\-//' | sed -n '1p')
+DownURL="https://github.com/NLnetLabs/unbound/archive/release-${PhienBanOn}.tar.gz"
+UpLink="https://tiny.cc/_ub"
+upTam="${TMunb}/tam"; rm -f $upTam;
 
 BuildUB () {
 	echo -e "\n$DauCau Đang build UnBound ${PhienBanOn}...\n\n"
