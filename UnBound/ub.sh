@@ -1,5 +1,5 @@
 #!/bin/bash
-PhienBan="201011f"
+PhienBan="201012a"
 GetTime=$(date +"%F %a %T"); Time="$GetTime -"; DauCau="#"
 TM="/sd"; mkdir -p $TM; TMunb="${TM}/unb"; mkdir -p $TMunb
 Log="${TMunb}/NhatKy.log"; if [ ! -f "$Log" ]; then echo '' > $Log; fi
@@ -49,7 +49,7 @@ KiemUB () {
 	PhienBanOff=$(unbound -V | grep Version | sed 's/Version //')
 	PhienBanOn=$(curl -sL ${DownLink} | grep release- | cut -d\" -f4 | grep [0-9]$ | sed 's/.*\-//' | sed -n '1p')
 	if [ $PhienBanOn == $PhienBanOff ]; then echo "$Time UnBound $PhienBanOn là bản mới nhất!" >> $Log;
-		echo "$DauCau UnBound $PhienBanOn là bản mới nhất!"; exit 1; else
+		echo "$DauCau UnBound $PhienBanOn là phiên bản mới nhất!"; exit 1; else
 		echo "$DauCau Đang cập nhật UnBound v.$PhienBanOff lên v.$PhienBanOn...";
 		echo "$DauCau Đang tải UnBound...";
 		curl -sLo ${TMunb}/unb.tar.gz ${DownURL};
@@ -63,7 +63,7 @@ KiemUB () {
 KiemSH () {
 	if [ $net -ge 1 ]; then echo "$DauCau Đang kiểm tra cập nhật $(basename "$0") $PhienBan...";
 		PhienBanMoi=$(curl -sL "${UpLink}" | grep PhienBan\= | sed 's/.*\=\"//; s/\"$//');
-		if [ $PhienBanMoi == $PhienBan ]; then echo "$DauCau $(basename "$0") $PhienBan là bản mới nhất!";
+		if [ $PhienBanMoi == $PhienBan ]; then echo "$DauCau $(basename "$0") $PhienBan là phiên bản mới nhất!";
 			else echo "$DauCau Đang cập nhật $(basename "$0") v.$PhienBan lên v.$PhienBanMoi...";
 				cp $0 ${TMunb}/$PhienBan\_$(basename "$0");
 				curl -sLo $upTam $UpLink; chmod +x $upTam; mv $upTam ${TMunb}/$0;
