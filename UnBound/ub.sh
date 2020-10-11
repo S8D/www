@@ -1,5 +1,5 @@
 #!/bin/bash
-PhienBan="201012g"
+PhienBan="201012h"
 GetTime=$(date +"%F %a %T"); Time="$GetTime -"; DauCau="#"
 TM="/sd"; mkdir -p $TM; TMunb="${TM}/unb"; mkdir -p $TMunb
 Log="${TMunb}/NhatKy.log"; if [ ! -f "$Log" ]; then echo '' > $Log; fi
@@ -19,7 +19,7 @@ DonDep () {
 	cd $TMunb; rm -rf $TMunb/unb.tar.gz $TMunb/unbound-*;
 }
 
-clear; echo "$ Đang kiểm tra máy chủ cập nhật..."
+echo "$ Đang kiểm tra máy chủ cập nhật..."
 CheckNet_1 () { ping -q -c 1 -W 1 bom.to >/dev/null; };
 CheckNet_2 () { ping -q -c 1 -W 1 tiny.cc >/dev/null; };
 CheckNet_3 () { ping -q -c 1 -W 1 gg.gg >/dev/null; };
@@ -44,8 +44,8 @@ KiemSH () {
 				mv $upTam $0;
 				echo "$Time $(basename "$0") được cập nhật lên $PhienBanMoi!"  >> $Log;
 				echo "$DauCau Khởi chạy $(basename "$0") $PhienBanMoi...";
-				#sh ${TMunb}/$(basename "$0"); 
-				sh $0
+				sh ${TMunb}/$(basename "$0"); 
+				#sh $0
 				exit 1; fi
 	fi
 }
