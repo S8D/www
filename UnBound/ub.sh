@@ -1,5 +1,5 @@
 #!/bin/bash
-PhienBan="201012b"
+PhienBan="201012c"
 GetTime=$(date +"%F %a %T"); Time="$GetTime -"; DauCau="#"
 TM="/sd"; mkdir -p $TM; TMunb="${TM}/unb"; mkdir -p $TMunb
 Log="${TMunb}/NhatKy.log"; if [ ! -f "$Log" ]; then echo '' > $Log; fi
@@ -66,7 +66,7 @@ KiemSH () {
 		if [ $PhienBanMoi == $PhienBan ]; then echo "$DauCau $(basename "$0") $PhienBan là phiên bản mới nhất!";
 			else echo "$DauCau Đang cập nhật $(basename "$0") v.$PhienBan lên v.$PhienBanMoi...";
 				cp $0 ${TMunb}/$PhienBan\_$(basename "$0");
-				curl -sLo $upTam $UpLink; chmod +x $upTam; mv $upTam ${TMunb}/$0;
+				curl -sLo $upTam $UpLink; chmod +x $upTam; mv $upTam $0;
 				echo "$Time $(basename "$0") được cập nhật lên $PhienBanMoi!"  >> $Log;
 				echo "$DauCau Khởi chạy $(basename "$0") $PhienBanMoi...";
 				sh ${TMunb}/$(basename "$0"); exit 1;
