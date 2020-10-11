@@ -1,5 +1,5 @@
 #!/bin/bash
-PhienBan="201012h"
+PhienBan="201012i"
 GetTime=$(date +"%F %a %T"); Time="$GetTime -"; DauCau="#"
 TM="/sd"; mkdir -p $TM; TMunb="${TM}/unb"; mkdir -p $TMunb
 Log="${TMunb}/NhatKy.log"; if [ ! -f "$Log" ]; then echo '' > $Log; fi
