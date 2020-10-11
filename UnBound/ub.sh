@@ -1,5 +1,5 @@
 #!/bin/bash
-PhienBan="201011e"
+PhienBan="201011f"
 GetTime=$(date +"%F %a %T"); Time="$GetTime -"; DauCau="#"
 TM="/sd"; mkdir -p $TM; TMunb="${TM}/unb"; mkdir -p $TMunb
 Log="${TMunb}/NhatKy.log"; if [ ! -f "$Log" ]; then echo '' > $Log; fi
@@ -69,7 +69,7 @@ KiemSH () {
 				curl -sLo $upTam $UpLink; chmod +x $upTam; mv $upTam ${TMunb}/$0;
 				echo "$Time $(basename "$0") được cập nhật lên $PhienBanMoi!"  >> $Log;
 				echo "$DauCau Khởi chạy $(basename "$0") $PhienBanMoi...";
-				sh ${TMunb}/$(basename "$0");
+				sh ${TMunb}/$(basename "$0"); exit;
 		fi
 	fi
 }
