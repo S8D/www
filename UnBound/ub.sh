@@ -1,5 +1,5 @@
 #!/bin/bash
-PhienBan="201012j"
+PhienBan="201012k"
 GetTime=$(date +"%F %a %T"); Time="$GetTime -"; DauCau="#"
 TM="/sd"; mkdir -p $TM; TMunb="${TM}/unb"; mkdir -p $TMunb
 Log="${TMunb}/NhatKy.log"; if [ ! -f "$Log" ]; then echo '' > $Log; fi
@@ -73,7 +73,7 @@ KiemUB () {
 		echo -e "$DauCau Đang giải nén UnBound...";
 		cd $TMunb; tar xzf unb.tar.gz;
 		if [ ! -f ${TMunb}/unbound-*/LICENSE ]; then echo -e "\n$DauCau Giải nén thất bại!!! Thoát ra!"; DonDep; exit;
-			else echo "$DauCau Giải thành công!!!"; BuildUB; fi;	
+			else echo "$DauCau Giải thành công!!!"; BuildUB; fi;
 	fi
 }
 
