@@ -1,5 +1,5 @@
 #!/bin/bash
-PhienBan="201011b"
+PhienBan="201011c"
 GetTime=$(date +"%F %a %T"); Time="$GetTime -"; DauCau="#"
 TM="/sd/"; TMunb="${TM}/unb";
 Log="${TMunb}/NhatKy.log"; if [ ! -f "$Log" ]; then echo '' > $Log; fi
@@ -16,7 +16,7 @@ dl4="https://github.com/NLnetLabs/unbound/releases/latest"
 DonDep () {
 	echo -e "\n$DauCau Đang xóa các file tạm..."
 	cd $TMunb; rm -rf $TMunb/unb.tar.gz $TMunb/unbound-*;
-	echo "$DauCau Bạn có thể xem thêm nhật ký chạy lệnh tại:\n${Log}"
+	echo -e "$DauCau Bạn có thể xem thêm nhật ký chạy lệnh tại:\n${Log}"
 }
 
 clear; echo -e "\n$ Đang kiểm tra máy chủ cập nhật..."
@@ -32,8 +32,6 @@ if CheckNet_1; then UpLink="${up1}"; DownLink="${dl1}"; net="1"; else
 		fi
 	fi
 fi
-
-
 
 echo -e "\n$DauCau Đang kiểm tra phiên bản...";
 PhienBanOff=$(unbound -V | grep Version | sed 's/Version //')
@@ -70,14 +68,15 @@ KiemUB () {
 
 KiemSH () {
 	if [ $net -ge 1 ]; then echo "$DauCau Đang kiểm tra cập nhật $(basename "$0") $PhienBan..."
-	PhienBanMoi=$(curl -sL "${UpLink}" | grep PhienBan\= | sed 's/.*\=\"//; s/\"$//');
-	if [ $PhienBanMoi == $PhienBan ]; then echo "$DauCau $(basename "$0") $PhienBan là bản mới nhất!";
-	else echo "$DauCau Đang cập nhật $(basename "$0") v.$PhienBan lên v.$PhienBanMoi...";
-		cp $0 ${TMunb}/$PhienBan\_$(basename "$0")
-		curl -sLo $upTam $UpLink; chmod +x $upTam; mv $upTam ${TMunb}/$0
-		echo "$Time $(basename "$0") được cập nhật lên $PhienBanMoi!"  >> $Log
-		echo "$DauCau Khởi chạy $(basename "$0") $PhienBanMoi..."; 
-		sh ${TMunb}/$(basename "$0")
+		PhienBanMoi=$(curl -sL "${UpLink}" | grep PhienBan\= | sed 's/.*\=\"//; s/\"$//');
+		if [ $PhienBanMoi == $PhienBan ]; then echo "$DauCau $(basename "$0") $PhienBan là bản mới nhất!";
+			else echo "$DauCau Đang cập nhật $(basename "$0") v.$PhienBan lên v.$PhienBanMoi...";
+				cp $0 ${TMunb}/$PhienBan\_$(basename "$0")
+				curl -sLo $upTam $UpLink; chmod +x $upTam; mv $upTam ${TMunb}/$0
+				echo "$Time $(basename "$0") được cập nhật lên $PhienBanMoi!"  >> $Log
+				echo "$DauCau Khởi chạy $(basename "$0") $PhienBanMoi..."; 
+				sh ${TMunb}/$(basename "$0")
+		fi
 	fi
 }
 
