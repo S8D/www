@@ -1,5 +1,5 @@
 #!/bin/bash
-PhhienBan="2001029b"
+PhienBan="2001029c"
 
 CauHinh="https://s8d.github.io/config/UnBound/CauHinh.conf"
 DichVu="https://s8d.github.io/config/UnBound/DichVu"
