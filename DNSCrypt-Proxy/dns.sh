@@ -1,5 +1,5 @@
 #!/bin/bash
-PhienBan="200930a"
+PhienBan="201029a"
 
 OS=`uname -m`; x64="x86_64"; arm="armv7l"; arm64="aarch64"; mips="mips"
 if [ $OS == $x64 ]; then linktai="x86_64"; fi
@@ -16,9 +16,9 @@ DichVu="${Home}/dns.service"
 CauHinh_Null="${Home}/CauHinh_Null.tar.gz"
 dl1="curl -sLo"; dl2="curl -sL"
 
-$dl1 ${Home}/cauhinh.toml ${CauHinh}
-$dl1 ${Home}/dns.service ${DichVu}
-$dl1 ${Home}/cauhinh.tar.gz ${CauHinh_Null}
+$dl1 $Home/cauhinh.toml $CauHinh
+$dl1 $Home/dns.service $DichVu
+$dl1 $Home/cauhinh.tar.gz $CauHinh_Null
 tar zxf cauhinh.tar.gz
 PhienBanOn=$(${dl2} "${DownLink}" | awk -F '"' '/tag_name/{print $4}')
 PhienBanOff=$(dns --version)
