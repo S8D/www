@@ -1,5 +1,5 @@
 #!/bin/bash
-PhienBan="201029b"
+PhienBan="201029c"
 
 OS=`uname -m`; x64="x86_64"; arm="armv7l"; arm64="aarch64"; mips="mips"
 if [ $OS == $x64 ]; then linktai="x86_64"; fi
@@ -24,7 +24,7 @@ PhienBanOn=$(${dl2} "${DownLink}" | awk -F '"' '/tag_name/{print $4}')
 PhienBanOff=$(dns --version)
 DownURL=$(${dl2} $DownLink | grep browser_download_url.*tar.gz | grep $linktai | sed 's/.*minisig//' | cut -d '"' -f 4);
 
-$dl1 dns.tar.gz $DownURL
+$dl1 $TM/dns.tar.gz $DownURL
 tar zxf dns.tar.gz
 mv linux*/* ./
 rm -rf linux*
