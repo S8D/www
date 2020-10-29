@@ -1,5 +1,5 @@
 #!/bin/bash
-PhhienBan="2001029a"
+PhhienBan="2001029b"
 
 CauHinh="https://s8d.github.io/config/UnBound/CauHinh.conf"
 DichVu="https://s8d.github.io/config/UnBound/DichVu"
@@ -19,9 +19,11 @@ apt update; apt install -y curl gcc ldnsutils libevent-dev libexpat1-dev libssl-
 groupdel unbound; groupadd -g 991 unbound
 useradd -c "unbound" -d /var/lib/unbound -u 991 -g unbound -s /bin/false unbound
 $dl $TM/unb.tar.gz $UB_u
-tar xzf unb.tar.gz; cd unbound-*
+tar xzf unb.tar.gz; cd $TM/unbound-*
 ./configure --prefix=/usr --disable-static --enable-dnscrypt --enable-subnet --includedir=${prefix}/include --infodir=${prefix}/share/info --libdir=/usr/lib --localstatedir=/var --mandir=${prefix}/share/man --sysconfdir=/etc --with-libevent --with-pidfile=/run/unbound.pid --with-rootkey-file=$UB/root.key
-make && make install && unbound -V
+make && make install
+command -v unbound >/dev/null 2>&1 || { echo "Cài đặt UnBound thất bại!!! Đang thoát" >&2; exit 1; }
+unbound -V
 $dl /lib/systemd/system/unbound.service $DichVu
 systemctl unmask unbound.service
 systemctl enable unbound.service
