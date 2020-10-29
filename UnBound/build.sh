@@ -1,5 +1,5 @@
 #!/bin/bash
-PhienBan="2001029c"
+PhienBan="2001029d"
 
 CauHinh="https://s8d.github.io/config/UnBound/CauHinh.conf"
 DichVu="https://s8d.github.io/config/UnBound/DichVu"
@@ -15,7 +15,7 @@ TM="/sd/unb"; mkdir -p $TM; cd $TM
 UB="/etc/unbound"
 dl="curl -sLo"
 
-apt update; apt install -y curl gcc ldnsutils libevent-dev libexpat1-dev libssl-dev
+apt update; apt install -y curl gcc ldnsutils libevent-dev libexpat1-dev libssl-dev libsodium-dev
 groupdel unbound; groupadd -g 991 unbound
 useradd -c "unbound" -d /var/lib/unbound -u 991 -g unbound -s /bin/false unbound
 $dl $TM/unb.tar.gz $UB_u
