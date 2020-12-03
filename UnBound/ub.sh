@@ -1,5 +1,5 @@
 #!/bin/bash
-PhienBan="201203b"
+PhienBan="201203c"
 GetTime=$(date +"%F %a %T"); Time="$GetTime -"; DauCau="#"
 TM="/sd"; mkdir -p $TM; TMunb="${TM}/unb"; mkdir -p $TMunb
 Log="${TMunb}/NhatKy.log"; if [ ! -f "$Log" ]; then echo '' > $Log; fi
@@ -40,8 +40,8 @@ PhienBanUB () {
 #	PhienBanOn=$(curl -sL ${DownLink} | grep release- | cut -d\" -f4 | grep [0-9]$ | sed 's/.*\-//' | sed -n '1p')
 # Trang chủ
 DownLink="https://nlnetlabs.nl/projects/unbound/download/"; 
-PhienBanOn=$(curl -sL ${DownLink} | grep "Current version" | sed 's/.*d //' | sed 's/ .*//')
-
+#PhienBanOn=$(curl -sL ${DownLink} | grep "Current version" | sed 's/.*d //' | sed 's/ .*//')
+PhienBanOn=$(curl -sL ${DownLink} | grep "(.tar.gz)" | sed 's/.*d //' | sed 's/.\{18\}$//')
 }
 
 KiemSH () {
