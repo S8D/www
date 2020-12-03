@@ -1,10 +1,11 @@
 #!/bin/bash
-PhienBan="201012e"
+PhienBan="201203a"
 GetTime=$(date +"%F %a %T"); Time="$GetTime -"; DauCau="#"
 TM="/sd"; mkdir -p $TM; TMunb="${TM}/unb"; mkdir -p $TMunb
 Log="${TMunb}/NhatKy.log"; if [ ! -f "$Log" ]; then echo '' > $Log; fi
 upTam="${TMunb}/tam"; rm -f $upTam
-DownURL="https://github.com/NLnetLabs/unbound/archive/release-${PhienBanOn}.tar.gz"
+DownURL="https://nlnetlabs.nl/downloads/unbound/unbound-latest.tar.gz"
+#DownURL="https://github.com/NLnetLabs/unbound/archive/release-${PhienBanOn}.tar.gz"
 up1="https://bom.to/_ub"
 up2="https://tiny.cc/_ub"
 up3="gg.gg/_ub"
