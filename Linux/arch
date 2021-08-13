@@ -1,0 +1,6 @@
+#!/bin/bash
+sudo curl -sSL https://xem.li/arch | bash
+sudo pacman -Syu
+sudo pacman -S cinnamon nemo-fileroller gnome-terminal
+systemctl enable lightdm
+systemctl enable NetworkManager
