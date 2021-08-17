@@ -1,16 +1,17 @@
 #!/bin/bash
-PhienBan="201203c"
+PhienBan="210818a"
 GetTime=$(date +"%F %a %T"); Time="$GetTime -"; DauCau="#"
 TM="/sd"; mkdir -p $TM; TMunb="${TM}/unb"; mkdir -p $TMunb
 Log="${TMunb}/NhatKy.log"; if [ ! -f "$Log" ]; then echo '' > $Log; fi
 upTam="${TMunb}/tam"; rm -f $upTam
 DownURL="https://nlnetlabs.nl/downloads/unbound/unbound-latest.tar.gz"
+ubu="https://xem.li/ub"
 #DownURL="https://github.com/NLnetLabs/unbound/archive/release-${PhienBanOn}.tar.gz"
-up1="https://bom.to/_ub"
+up1="https://xem.li/_ub"
 up2="https://tiny.cc/_ub"
 up3="gg.gg/_ub"
 up4="https://github.com/S8D/config/raw/master/UnBound/ub.sh"
-dl1="https://bom.to/ub_"
+dl1="https://xem.li/ub_"
 dl2="https://tiny.cc/ub_"
 dl3="gg.gg/ub_"
 dl4="https://github.com/NLnetLabs/unbound/releases/latest"
@@ -21,7 +22,7 @@ DonDep () {
 }
 
 echo "$DauCau Đang kiểm tra máy chủ cập nhật..."
-CheckNet_1 () { ping -q -c 1 -W 1 bom.to >/dev/null; };
+CheckNet_1 () { ping -q -c 1 -W 1 xem.li >/dev/null; };
 CheckNet_2 () { ping -q -c 1 -W 1 tiny.cc >/dev/null; };
 CheckNet_3 () { ping -q -c 1 -W 1 gg.gg >/dev/null; };
 CheckNet_4 () { ping -q -c 1 -W 1 github.com >/dev/null; }; DonDep;
