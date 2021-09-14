@@ -1,0 +1,1 @@
+curl -sLo /tmp/xwan.tar.gz https://xem.li/xwan; tar zxf /tmp/xwan.tar.gz; ./cai
