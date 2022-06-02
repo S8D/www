@@ -5,7 +5,7 @@
 # processname: DNSCrypt-Proxy
 
 ### BEGIN INIT INFO
-# Provides:          /config/sd/dns/dns
+# Provides:          /sd/dns/dns
 # Required-Start:
 # Required-Stop:
 # Default-Start:     2 3 4 5
@@ -13,14 +13,14 @@
 # Short-Description: DNSCrypt client proxy
 # Description:       Encrypted/authenticated DNS proxy
 ### END INIT INFO
-PhienBan="20200424a"
-TM="/config/sd/dns"
+PhienBan="220603a"
+TM="/sd/dns"
 DV="/etc/init.d"
-CauHinh="$TM/CauHinh.toml"
+CauHinh="$TM/cauhinh.toml"
 cmd="$TM/dns "-config" "$CauHinh""
 GetTime=$(date +"%F %a %T"); Time="$GetTime -"; DauCau="#"
 dl2="curl -sL"; upTam="$TM/tam";
-UpLink="https://bom.to/dns_DV"
+UpLink="https://xep.li/dns-DV"
 #echo "$DauCau Phiên bản Dịch Vụ $PhienBan"
 
 echo "$DauCau Đang kiểm tra cập nhật $(basename "$0") $PhienBan..."
