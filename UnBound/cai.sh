@@ -18,7 +18,8 @@ apk add curl unbound lsof bind-tools; fi
 which apt >/dev/null 2>&1; if [ $? -eq 0 ]; then 
 apt install -y curl unbound lsof bind-tools; fi
 which opkg >/dev/null 2>&1; if [ $? -eq 0 ]; then 
-opkg update; opkg install curl lsof bind-tools unbound-anchor unbound-checkconf luci-i18n-unbound-en luci-i18n-unbound-vi; fi
+opkg update; opkg install curl lsof bind-tools unbound-anchor unbound-checkconf luci-i18n-unbound-en luci-i18n-unbound-vi; 
+fi
 
 rm -rf $UB
 cat > $UB/root.trust << \EOF
@@ -60,6 +61,8 @@ which opkg >/dev/null 2>&1; if [ $? -eq 0 ]; then
 	/etc/init.d/unbound start
 	/etc/init.d/unbound status
 fi
+
+/etc/unbound/trusted-key.key
 
 lsof -i -P -n | grep LISTEN
 dig @127.0.2.2 -p 2222 t.co
