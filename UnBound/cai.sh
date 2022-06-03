@@ -1,4 +1,4 @@
-PhienBan=220603
+PhienBan=220603a
 
 dl="curl -sLo"
 UB="/etc/unbound"
@@ -17,7 +17,7 @@ apk add curl unbound lsof bind-tools; fi
 which apt >/dev/null 2>&1; if [ $? -eq 0 ]; then 
 apt install -y curl unbound lsof bind-tools; fi
 which opkg >/dev/null 2>&1; if [ $? -eq 0 ]; then 
-opkg update; opkg install -y curl unbound lsof bind-tools; fi
+opkg update; opkg install curl unbound lsof bind-tools; fi
 
 cat > $UB/root.trust << \EOF
 . IN DS 20326 8 2 E06D44B80B8F1D39A95C0B0D7C65D08458E880409BBC683457104237C7F8EC8D
