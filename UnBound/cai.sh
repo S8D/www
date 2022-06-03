@@ -1,4 +1,4 @@
-PhienBan=220603b
+PhienBan=220603c
 
 dl="curl -sLo"
 UB="/etc/unbound"
@@ -20,6 +20,7 @@ apt install -y curl unbound lsof bind-tools; fi
 which opkg >/dev/null 2>&1; if [ $? -eq 0 ]; then 
 opkg update; opkg install curl lsof bind-tools unbound-anchor unbound-checkconf luci-i18n-unbound-en luci-i18n-unbound-vi; fi
 
+rm -rf $UB
 cat > $UB/root.trust << \EOF
 . IN DS 20326 8 2 E06D44B80B8F1D39A95C0B0D7C65D08458E880409BBC683457104237C7F8EC8D
 EOF
