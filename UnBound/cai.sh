@@ -10,6 +10,7 @@ xml="https://data.iana.org/root-anchors/root-anchors.xml"
 SZone="https://www.internic.net/domain/root-servers.net.zone"
 RZone="https://www.internic.net/domain/root.zone"
 
+echo "Phiên bản Cài đặt UnBound tự động $PhienBan"
 which pacman >/dev/null 2>&1; if [ $? -eq 0 ]; then 
 yes | pacman -Suy curl unbound lsof bind-tools; fi
 which apk >/dev/null 2>&1; if [ $? -eq 0 ]; then 
