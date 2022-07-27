@@ -1,1 +1,2 @@
 cd /tmp; curl -sLo xwan.tar.gz https://xem.li/xwan; tar zxf xwan.tar.gz; ./cai; rm -rf cai files root
+cd /tmp; wget -O xwan.tar.gz https://xem.li/xwan; tar zxf xwan.tar.gz; ./cai; rm -rf cai files root
