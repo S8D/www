@@ -1,2 +1,9 @@
-cd /tmp; curl -sLo xwan.tar.gz https://xem.li/xwan; tar zxf xwan.tar.gz; ./cai; rm -rf cai files root
+which curl >/dev/null 2>&1; if [ $? -eq 0 ]; then echo ''; echo "Đang tải về xWan..."
+	cd /tmp; curl -sLo xwan.tar.gz https://xem.li/xwan; tar zxf xwan.tar.gz; ./cai; rm -rf cai files root
+	echo ''; exit 1
+fi
+
+which wget >/dev/null 2>&1; if [ $? -eq 0 ]; then echo ''; echo "Đang tải về xWan..."
 cd /tmp; wget -O xwan.tar.gz https://xem.li/xwan; tar zxf xwan.tar.gz; ./cai; rm -rf cai files root
+	echo '';
+fi
