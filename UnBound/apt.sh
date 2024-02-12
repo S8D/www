@@ -1,9 +1,8 @@
 #!/bin/bash
-PhienBan="2001205b"
+PhienBan="220924"
 
 CauHinh="https://s8d.github.io/config/UnBound/CauHinh.conf"
 DichVu="https://s8d.github.io/config/UnBound/DichVu"
-UB_u="https://www.nlnetlabs.nl/downloads/unbound/unbound-latest.tar.gz"
 NRoot="https://www.internic.net/domain/named.root"
 Pem="https://data.iana.org/root-anchors/icannbundle.pem"
 p7s="https://data.iana.org/root-anchors/root-anchors.p7s"
@@ -16,24 +15,11 @@ UB="/etc/unbound"
 dl="curl -sLo"
 goi="/usr/sbin"
 
-echo -e "Đang cài các gói cần thiết...\n"
-apt update; apt install -y curl gcc ldnsutils libevent-dev libexpat1-dev libssl-dev libsodium-dev build-essential
+which unbound >/dev/null 2>&1; if [ $? -eq 0 ]; then echo -e "UnBound đã được cài đặt trong hệ thống! Đang tiến hành gỡ bỏ...\n"
+	apt remove unbound -y; rm -rf /etc/unbound /etc/init.d/unbound /etc/insserv.conf.d/unbound /etc/resolvconf/update.d/unbound; echo ''; fi
 
-echo -e "Đang thêm tài khoản UnBound vào hệ thống...\n"
-$goi/groupdel unbound; $goi/groupadd -g 991 unbound
-$goi/useradd -c "unbound" -d /var/lib/unbound -u 991 -g unbound -s /bin/false unbound
-
-echo -e "Đang tải UnBound phiên bản mới nhất....\n"
-$dl $TM/unb.tar.gz $UB_u
-
-echo -e "Đang giải nén UnBound...\n"
-tar xzf unb.tar.gz; cd $TM/unbound-*
-
-echo -e "Đang build UnBound...\n"
-./configure --prefix=/usr --disable-static --enable-dnscrypt --enable-subnet --includedir=${prefix}/include --infodir=${prefix}/share/info --libdir=/usr/lib --localstatedir=/var --mandir=${prefix}/share/man --sysconfdir=/etc --with-libevent --with-pidfile=/run/unbound.pid --with-rootkey-file=$UB/root.key
-
-echo -e "Đang cài UnBound...\n"
-make && make install
+echo -e "Đang cài UnBound và các gói cần thiết...\n"
+which apt >/dev/null 2>&1; if [ $? -eq 0 ]; then apt update; apt install -y curl dnsutils unbound unbound-anchor lsof lighttpd-mod-openssl; fi
 
 echo -e "Đang kiểm tra UnBound trong hệ thống...\n"
 $goi/unbound -V >/dev/null 2>&1 || { echo "Cài đặt UnBound thất bại!!! Đang thoát" >&2; exit 1; }
@@ -43,6 +29,9 @@ systemctl unmask unbound.service
 systemctl enable unbound.service
 
 echo -e "Đang cấu hình UnBound...\n"
+key=$(unbound -V | grep rootkey | sed 's/.*rootkey\-file\=//; s/ .*//')
+echo "Key: $key"
+key="$UB/root.key"
 cat > $UB/root.trust << \EOF
 . IN DS 20326 8 2 E06D44B80B8F1D39A95C0B0D7C65D08458E880409BBC683457104237C7F8EC8D
 EOF
@@ -50,9 +39,10 @@ mkdir -p $UB/unbound.conf.d
 echo -e 'include: "/etc/unbound/unbound.conf.d/*.conf"' >> $UB/unbound.conf
 
 echo -e "Đang tải file cấu hình UnBound...\n"
+rm -rf $UB/unbound.conf.d/*.conf
 $dl $UB/unbound.conf.d/pi-hole.conf ${CauHinh}
 $dl $UB/icannbundle.pem $Pem
-$goi/unbound-anchor -c $UB/icannbundle.pem -a $UB/root.key -v
+$goi/unbound-anchor -c $UB/icannbundle.pem -a $key -v
 mkdir -p $UB/root-anchors
 $dl $UB/root.hints $NRoot
 $dl $UB/root-anchors/root-anchors.p7s $p7s
@@ -60,11 +50,14 @@ $dl $UB/root-anchors/root-anchors.xml $xml
 $dl $UB/root.zone $RZone
 $dl $UB/root-servers.net.zone $SZone
 
+echo "Đang kiểm tra các khóa xác thực và trạng thái truy vấn"
+TrangThai=$($goi/unbound-anchor -c $UB/icannbundle.pem -a $key -v | grep anchor | sed 's/\:.*//')
+if [ $TrangThai == "fail" ]; then echo  -e "\nHệ thống của bạn đang chuyển tiếp hoặc chuyển hướng cổng 53!!!\nVui lòng cho phép truy vấn trực tiếp từ thiết bị này!\n"; fi
 echo -e "Kiểm tra cấu hình UnBound\n"
 $goi/unbound-checkconf
 
 echo -e "Chạy dịch vụ UnBound\n"
-$goi/service unbound start
+$goi/service unbound restart
 
 echo -e "Kiểm tra cổng đang chạy\n"
 lsof -i -P -n | grep LISTEN
